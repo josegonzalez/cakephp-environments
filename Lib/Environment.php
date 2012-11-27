@@ -102,7 +102,7 @@ class Environment {
 	}
 
 	protected function _match($environment, $params) {
-		if (php_sapi_name() != 'cli') {
+		if (php_sapi_name() == 'cli') {
 			return false;
 		}
 

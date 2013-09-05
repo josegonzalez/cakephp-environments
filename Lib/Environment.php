@@ -110,8 +110,8 @@ class Environment {
 			return false;
 		}
 
-		if ($params === true) {
-			return true;
+		if (is_bool ($params)) {
+			return $params;
 		}
 
 		foreach ($params as $param => $value) {

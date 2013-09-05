@@ -14,7 +14,9 @@
 class Environment {
 
 	public $environments = array();
-
+	
+	protected static $_instance;
+	
 	protected $_configMap = array(
 		'security' => 'Security.level'
 	);
@@ -23,47 +25,49 @@ class Environment {
 		'server' => 'SERVER_NAME'
 	);
 
-	static function &getInstance() {
-		static $instance = array();
-		if (!isset($instance[0])) {
+	public static function &getInstance() {
+		if (! self::$_instance) {
 			$Environment = 'Environment';
 			if (config('app_environment')) {
 				$Environment = 'App' . $Environment;
 			}
-			$instance[0] = new $Environment();
+			
+			self::$_instance = new $Environment();
 			Configure::write('Environment.initialized', true);
 		}
-		return $instance[0];
+		
+		return self::$_instance;
 	}
 
-	static function configure($name, $params, $config = null, $callable = null) {
+	public static function configure($name, $params, $config = null, $callable = null) {
 		$_this = Environment::getInstance();
 		$_this->environments[$name] = compact('name', 'params', 'config', 'callable');
 	}
 
-	static function start($environment = null) {
+	public static function start($environment = null, $default = 'development') {
 		$_this =& Environment::getInstance();
-		$_this->setup($environment);
+		$_this->setup($environment, $default);
 	}
 
-	static function is($environment) {
-		$_this =& Environment::getInstance();
-		return ($_this->name === $environment);
-	}
-
-	public function __construct() {
-		if (Configure::read('Environment.initialized')) {
-			throw new Exception('Environment can only be initialized once');
-			return false;
+	public static function is($environment = null) {
+		$current = Configure::read ('Environment.name');
+		
+		if (! $environment) {
+			return $current;
 		}
+		
+		return $current === $environment;
 	}
 
-	public function setup($environment = null) {
+	protected function __construct() {}
+	protected function __clone() { }
+
+	public function setup($environment = null, $default = 'development') {
 		if (Configure::read('Environment.setup')) {
 			return;
 		}
 
-		$current = ($environment === null) ? 'development' : $environment;
+		$current = ($environment === null) ? $default : $environment;
 		if (empty($environment)) {
 			foreach ($this->environments as $name => $config) {
 				if ($this->_envMatch($name) || $this->_match($name, $config['params'])) {
@@ -106,8 +110,8 @@ class Environment {
 			return false;
 		}
 
-		if ($params === true) {
-			return true;
+		if (is_bool ($params)) {
+			return $params;
 		}
 
 		foreach ($params as $param => $value) {

@@ -46,8 +46,8 @@ class Environment {
 	}
 
 	public static function is($environment = null) {
-		$current = Configure::read ('Environment.name');
-
+		$current = Configure::read('Environment.name');
+		
 		if (! $environment) {
 			return $current;
 		}
@@ -66,7 +66,7 @@ class Environment {
 		$current = ($environment === null) ? $default : $environment;
 		if (empty($environment)) {
 			foreach ($this->environments as $name => $config) {
-				if ($this->_envMatch($name) || $this->_match($name, $config['params'])) {
+				if ($this->_match($name, $config['params'])) {
 					$current = $name;
 					break;
 				}
@@ -99,15 +99,22 @@ class Environment {
 				Configure::write('Environment.setup', true);
 			}
 		}
-	}
 
-	protected function _envMatch($environment) {
-		return (isset($_SERVER['CAKE_ENV']) && $_SERVER['CAKE_ENV'] == $environment);
+		return true;
 	}
 
 	protected function _match($environment, $params) {
-		if (is_bool ($params)) {
+		$_cake_env = env('CAKE_ENV');
+		if (!empty($_cake_env)) {
+			return env('CAKE_ENV') == $environment;
+		}
+		
+		if (is_bool($params)) {
 			return $params;
+		}
+
+		if (is_callable($params) || function_exists($params)) {
+			return $params();
 		}
 
 		foreach ($params as $param => $value) {

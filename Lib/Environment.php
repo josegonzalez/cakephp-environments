@@ -42,7 +42,7 @@ class Environment {
 
 	public static function start($environment = null, $default = 'development') {
 		$_this =& Environment::getInstance();
-		$_this->setup($environment, $default);
+		return $_this->setup($environment, $default);
 	}
 
 	public static function is($environment = null) {

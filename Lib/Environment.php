@@ -109,6 +109,10 @@ class Environment {
 		if (is_bool ($params)) {
 			return $params;
 		}
+		
+		if (is_callable($params) || function_exists($params)) {
+			return $params();
+		}
 
 		foreach ($params as $param => $value) {
 			if (function_exists($param)) {

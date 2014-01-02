@@ -47,7 +47,7 @@ class Environment {
 
 	public static function is($environment = null) {
 		$current = Configure::read('Environment.name');
-		
+
 		if (! $environment) {
 			return $current;
 		}
@@ -108,12 +108,12 @@ class Environment {
 		if (!empty($_cake_env)) {
 			return env('CAKE_ENV') == $environment;
 		}
-		
+
 		if (is_bool($params)) {
 			return $params;
 		}
 
-		if (is_callable($params) || function_exists($params)) {
+		if (is_callable($params) || (is_string($params) && function_exists($params))) {
 			return $params();
 		}
 

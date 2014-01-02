@@ -68,10 +68,12 @@ class EnvironmentTest extends CakeTestCase {
 		}
 
 		Configure::read('Environment.setup', false);
+		$_SERVER['CAKE_ENV'] = null;
 	}
 
 	public function tearDown() {
 		parent::tearDown();
+		unset($this->Environment, $_SERVER['CAKE_ENV']);
 	}
 
 	public function testConfigure() {

@@ -74,7 +74,7 @@ class Environment {
 		}
 
 		if (!isset($this->environments[$current])) {
-			throw new CakeException('Environment ' . $current . ' does not exist.');
+			throw new CakeException(sprintf('Environment %s does not exist.', $current));
 		}
 
 		$config = array_merge(

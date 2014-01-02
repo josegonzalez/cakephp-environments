@@ -14,15 +14,11 @@
 class Environment {
 
 	public $environments = array();
-	
+
 	protected static $_instance;
-	
+
 	protected $_configMap = array(
 		'security' => 'Security.level'
-	);
-
-	protected $_paramMap = array(
-		'server' => 'SERVER_NAME'
 	);
 
 	public static function &getInstance() {
@@ -31,11 +27,11 @@ class Environment {
 			if (config('app_environment')) {
 				$Environment = 'App' . $Environment;
 			}
-			
+
 			self::$_instance = new $Environment();
 			Configure::write('Environment.initialized', true);
 		}
-		
+
 		return self::$_instance;
 	}
 
@@ -46,16 +42,16 @@ class Environment {
 
 	public static function start($environment = null, $default = 'development') {
 		$_this =& Environment::getInstance();
-		$_this->setup($environment, $default);
+		return $_this->setup($environment, $default);
 	}
 
 	public static function is($environment = null) {
 		$current = Configure::read ('Environment.name');
-		
+
 		if (! $environment) {
 			return $current;
 		}
-		
+
 		return $current === $environment;
 	}
 
@@ -64,7 +60,7 @@ class Environment {
 
 	public function setup($environment = null, $default = 'development') {
 		if (Configure::read('Environment.setup')) {
-			return;
+			return false;
 		}
 
 		$current = ($environment === null) ? $default : $environment;
@@ -75,6 +71,10 @@ class Environment {
 					break;
 				}
 			}
+		}
+
+		if (!isset($this->environments[$current])) {
+			throw new CakeException('Environment ' . $current . ' does not exist.');
 		}
 
 		$config = array_merge(
@@ -106,19 +106,11 @@ class Environment {
 	}
 
 	protected function _match($environment, $params) {
-		if (php_sapi_name() == 'cli') {
-			return false;
-		}
-
 		if (is_bool ($params)) {
 			return $params;
 		}
 
 		foreach ($params as $param => $value) {
-			if (isset($this->_paramMap[$param])) {
-				$param = $this->_paramMap[$param];
-			}
-
 			if (function_exists($param)) {
 				$match = call_user_func($param, $value);
 			} elseif (is_array($value)) {

@@ -14,9 +14,9 @@
 class Environment {
 
 	public $environments = array();
-	
+
 	protected static $_instance;
-	
+
 	protected $_configMap = array(
 		'security' => 'Security.level'
 	);
@@ -31,7 +31,7 @@ class Environment {
 			self::$_instance = new $Environment();
 			Configure::write('Environment.initialized', true);
 		}
-		
+
 		return self::$_instance;
 	}
 
@@ -111,7 +111,7 @@ class Environment {
 		if (is_bool ($params)) {
 			return $params;
 		}
-		
+
 		if (is_callable($params) || function_exists($params)) {
 			return $params();
 		}

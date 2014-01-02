@@ -27,7 +27,7 @@ class Environment {
 			if (config('app_environment')) {
 				$Environment = 'App' . $Environment;
 			}
-			
+
 			self::$_instance = new $Environment();
 			Configure::write('Environment.initialized', true);
 		}
@@ -47,11 +47,11 @@ class Environment {
 
 	public static function is($environment = null) {
 		$current = Configure::read('Environment.name');
-		
+
 		if (! $environment) {
 			return $current;
 		}
-		
+
 		return $current === $environment;
 	}
 
@@ -71,6 +71,10 @@ class Environment {
 					break;
 				}
 			}
+		}
+
+		if (!isset($this->environments[$current])) {
+			throw new CakeException(sprintf('Environment %s does not exist.', $current));
 		}
 
 		$config = array_merge(
@@ -104,12 +108,12 @@ class Environment {
 		if (!empty($_cake_env)) {
 			return env('CAKE_ENV') == $environment;
 		}
-		
+
 		if (is_bool($params)) {
 			return $params;
 		}
 
-		if (is_callable($params) || function_exists($params)) {
+		if (is_callable($params) || (is_string($params) && function_exists($params))) {
 			return $params();
 		}
 

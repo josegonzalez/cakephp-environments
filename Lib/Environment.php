@@ -21,10 +21,6 @@ class Environment {
 		'security' => 'Security.level'
 	);
 
-	protected $_paramMap = array(
-		'server' => 'SERVER_NAME'
-	);
-
 	public static function &getInstance() {
 		if (! self::$_instance) {
 			$Environment = 'Environment';
@@ -115,10 +111,6 @@ class Environment {
 		}
 
 		foreach ($params as $param => $value) {
-			if (isset($this->_paramMap[$param])) {
-				$param = $this->_paramMap[$param];
-			}
-
 			if (function_exists($param)) {
 				$match = call_user_func($param, $value);
 			} elseif (is_array($value)) {

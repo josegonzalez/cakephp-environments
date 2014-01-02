@@ -60,7 +60,7 @@ class Environment {
 
 	public function setup($environment = null, $default = 'development') {
 		if (Configure::read('Environment.setup')) {
-			return;
+			return false;
 		}
 
 		$current = ($environment === null) ? $default : $environment;
@@ -95,6 +95,8 @@ class Environment {
 				Configure::write('Environment.setup', true);
 			}
 		}
+
+		return true;
 	}
 
 	protected function _envMatch($environment) {

@@ -55,8 +55,11 @@ class Environment {
 		return $current === $environment;
 	}
 
-	protected function __construct() {}
-	protected function __clone() { }
+	protected function __construct() {
+	}
+
+	protected function __clone() {
+	}
 
 	public function setup($environment = null, $default = 'development') {
 		if (Configure::read('Environment.setup')) {
@@ -92,20 +95,14 @@ class Environment {
 			$this->environments[$current]['callable']();
 		}
 
-		if (Configure::read('debug') > 0) {
-			App::uses('CakeLog', 'Log');
-			if (class_exists('CakeLog')) {
-				CakeLog::write(LOG_INFO, $current);
-				Configure::write('Environment.setup', true);
-			}
-		}
+		Configure::write('Environment.setup', true);
 
 		return true;
 	}
 
 	protected function _match($environment, $params) {
-		$_cake_env = env('CAKE_ENV');
-		if (!empty($_cake_env)) {
+		$cakeEnv = env('CAKE_ENV');
+		if (!empty($cakeEnv)) {
 			return env('CAKE_ENV') == $environment;
 		}
 

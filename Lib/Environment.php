@@ -95,13 +95,7 @@ class Environment {
 			$this->environments[$current]['callable']();
 		}
 
-		if (Configure::read('debug') > 0) {
-			App::uses('CakeLog', 'Log');
-			if (class_exists('CakeLog')) {
-				CakeLog::write(LOG_INFO, $current);
-				Configure::write('Environment.setup', true);
-			}
-		}
+		Configure::write('Environment.setup', true);
 
 		return true;
 	}

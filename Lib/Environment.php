@@ -55,8 +55,11 @@ class Environment {
 		return $current === $environment;
 	}
 
-	protected function __construct() {}
-	protected function __clone() { }
+	protected function __construct() {
+	}
+
+	protected function __clone() {
+	}
 
 	public function setup($environment = null, $default = 'development') {
 		if (Configure::read('Environment.setup')) {
@@ -104,8 +107,8 @@ class Environment {
 	}
 
 	protected function _match($environment, $params) {
-		$_cake_env = env('CAKE_ENV');
-		if (!empty($_cake_env)) {
+		$cakeEnv = env('CAKE_ENV');
+		if (!empty($cakeEnv)) {
 			return env('CAKE_ENV') == $environment;
 		}
 

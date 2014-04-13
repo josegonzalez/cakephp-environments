@@ -1,6 +1,8 @@
-# cakephp-environments
+[![Build Status](https://travis-ci.org/josegonzalez/cakephp-environments.png?branch=master)](https://travis-ci.org/josegonzalez/cakephp-environments) [![Coverage Status](https://coveralls.io/repos/josegonzalez/cakephp-environments/badge.png?branch=master)](https://coveralls.io/r/josegonzalez/cakephp-environments?branch=master) [![Total Downloads](https://poser.pugx.org/josegonzalez/cakephp-environments/d/total.png)](https://packagist.org/packages/josegonzalez/cakephp-environments) [![Latest Stable Version](https://poser.pugx.org/josegonzalez/cakephp-environments/v/stable.png)](https://packagist.org/packages/josegonzalez/cakephp-environments)
 
-CakePHP Environments Library as a plugin
+# Environments Plugin
+
+A plugin to handle environment-level configuration
 
 ## Requirements
 
@@ -8,9 +10,23 @@ CakePHP Environments Library as a plugin
 
 ## Installation
 
+_[Using [Composer](http://getcomposer.org/)]_
+
+[View on Packagist](https://packagist.org/packages/josegonzalez/cakephp-environments), and copy the json snippet for the latest version into your project's `composer.json`. Eg, v. 1.0.0 would look like this:
+
+```javascript
+{
+	"require": {
+		"josegonzalez/cakephp-environments": "1.0.0"
+	}
+}
+```
+
+Because this plugin has the type `cakephp-plugin` set in it's own `composer.json`, composer knows to install it inside your `/Plugins` directory, rather than in the usual vendors file. It is recommended that you add `/Plugins/Environments` to your .gitignore file. (Why? [read this](http://getcomposer.org/doc/faqs/should-i-commit-the-dependencies-in-my-vendor-directory.md).)
+
 _[Manual]_
 
-* Download this: [https://github.com/OctoBear/cakephp-environments/zipball/master](https://github.com/OctoBear/cakephp-environments/zipball/master)
+* Download this: [https://github.com/josegonzalez/cakephp-environments/zipball/master](https://github.com/josegonzalez/cakephp-environments/zipball/master)
 * Unzip that download.
 * Copy the resulting folder to `app/Plugin`
 * Rename the folder you just copied to `Environments`
@@ -19,7 +35,7 @@ _[GIT Submodule]_
 
 In your app directory type:
 
-	git submodule add git://github.com/OctoBear/cakephp-environments.git Plugin/Environments
+	git submodule add git://github.com/josegonzalez/cakephp-environments.git Plugin/Environments
 	git submodule init
 	git submodule update
 
@@ -27,7 +43,7 @@ _[GIT Clone]_
 
 In your plugin directory type
 
-	git clone git://github.com/OctoBear/cakephp-environments.git Environments
+	git clone git://github.com/josegonzalez/cakephp-environments.git Environments
 
 ### Enable plugin
 
@@ -154,7 +170,7 @@ This way, the only place necessary to view connection information is in your con
 
 ## License
 
-Copyright (c) 2010-2012 Jose Diaz-Gonzalez
+Copyright (c) 2014 Jose Diaz-Gonzalez
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

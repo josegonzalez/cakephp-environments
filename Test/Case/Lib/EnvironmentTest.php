@@ -1,5 +1,5 @@
 <?php
-App::uses('Environment', 'Environment.Lib');
+App::uses('Environment', 'Environments.Lib');
 
 class EnvironmentTest extends CakeTestCase {
 

@@ -5,21 +5,21 @@ Environment::configure('production',
 		'server' => array('example.com')
 	),
 	array(
-		'Settings.FULL_BASE_URL'  => 'http://example.com',
+		'Settings.FULL_BASE_URL' => 'http://example.com',
 
 		// Email settings (maybe deprecated in 2.x)
-		'Email.username'          => 'email@example.com',
-		'Email.password'          => 'password',
-		'Email.test'              => 'email@example.com',
-		'Email.from'              => 'email@example.com',
+		'Email.username' => 'email@example.com',
+		'Email.password' => 'password',
+		'Email.test' => 'email@example.com',
+		'Email.from' => 'email@example.com',
 
 		// Debug should be off in production
-		'debug'                   => 0,
+		'debug' => 0,
 
 		// Securty
-		'Security.level'          => 'medium',
-		'Security.salt'           => 'SALT',
-		'Security.cipherSeed'     => 'CIPHERSEED',
+		'Security.level' => 'medium',
+		'Security.salt' => 'SALT',
+		'Security.cipherSeed' => 'CIPHERSEED',
 	),
 	function() {
 		error_reporting(0);

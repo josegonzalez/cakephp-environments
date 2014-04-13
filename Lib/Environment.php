@@ -61,6 +61,12 @@ class Environment {
 	protected function __clone() {
 	}
 
+/**
+ * Configures the current environment
+ *
+ * @return boolean
+ * @throws CakeException
+ **/
 	public function setup($environment = null, $default = 'development') {
 		if (Configure::read('Environment.setup')) {
 			return false;

@@ -76,6 +76,10 @@ Your `environments.php` should contain the following:
 
 	Environment::start();
 
+Then, you need to include the `environments.php` file you created in your application, for example in `bootstrap.php`:
+
+	include dirname(__FILE__) . DS . 'bootstrap' . DS . 'environments.php';
+
 This will:
 
 - Load the environments plugin in cases where it may not already be loaded

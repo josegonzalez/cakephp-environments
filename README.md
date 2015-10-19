@@ -131,7 +131,7 @@ Example usage of the `Environment::configure()` call is available in the `Config
 
 ### Database Switching
 
-You may wish to set database connection information based upon the current environment. The following is the preferred method:
+You may wish to set database connection information based upon the current environment. You can set your `app/Config/database.php` to the following contents:
 
 	<?php
 	class DATABASE_CONFIG {

@@ -78,7 +78,7 @@ Example usage of the `\Josegonzalez\Environments\Environment::configure()` call 
 - `$name`: Usually something like `production` or `development`. Good practice is to name it the same as the file it was in, so that there isn't any confusion as to what a given env file contains
 - `$params`: An array or boolean of environment variables used to check whether this environment applies. If a boolean and set to true, this environment is automatically initiated. A value of `true` should only be used for development:
 
-	# If a previous environment is not enabled, this one will be set
+	If a previous environment is not enabled, this one will be set
 
     	\Josegonzalez\Environments\Environment::configure(
             'development',
@@ -86,7 +86,7 @@ Example usage of the `\Josegonzalez\Environments\Environment::configure()` call 
             ['debug' => true]
         );
 
-	# If an array, the **keys** may be function names that are called, with the **values** being passed to it:
+	If an array, the **keys** may be function names that are called, with the **values** being passed to it:
 
     	\Josegonzalez\Environments\Environment::configure(
             'development',
@@ -96,7 +96,7 @@ Example usage of the `\Josegonzalez\Environments\Environment::configure()` call 
     	   ]
         );
 
-	# In all other cases, we simply check the environment:
+	In all other cases, we simply check the environment:
 
     	\Josegonzalez\Environments\Environment::configure(
             'octo_development',
@@ -119,7 +119,7 @@ Example usage of the `\Josegonzalez\Environments\Environment::configure()` call 
     	    ]
         );
 
-	# If we are running in CLI, the only check enforced is `CAKE_ENV`, and the value MUST be the name of the environment:
+	If we are running in CLI, the only check enforced is `CAKE_ENV`, and the value MUST be the name of the environment:
 
 		CAKE_ENV=production Console/cake bake all
 

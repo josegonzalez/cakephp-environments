@@ -1,59 +1,64 @@
 <?php
 
-Environment::configure('production',
-	array(
-		'server' => array('example.com')
-	),
-	array(
-		'Settings.FULL_BASE_URL' => 'http://example.com',
+use Cake\Cache\Cache;
+use Cake\Core\Configure;
+use Josegonzalez\Environments\Environment;
 
-		// Email settings (maybe deprecated in 2.x)
-		'Email.username' => 'email@example.com',
-		'Email.password' => 'password',
-		'Email.test' => 'email@example.com',
-		'Email.from' => 'email@example.com',
+Environment::configure(
+    'production',
+    [
+        'server' => ['example.com']
+    ],
+    [
+        'Settings.FULL_BASE_URL' => 'http://example.com',
 
-		// Debug should be off in production
-		'debug' => 0,
+        // Email settings (maybe deprecated in 2.x)
+        'Email.username' => 'email@example.com',
+        'Email.password' => 'password',
+        'Email.test' => 'email@example.com',
+        'Email.from' => 'email@example.com',
 
-		// Securty
-		'Security.level' => 'medium',
-		'Security.salt' => 'SALT',
-		'Security.cipherSeed' => 'CIPHERSEED',
-	),
-	function() {
-		error_reporting(0);
+        // Debug should be off in production
+        'debug' => 0,
 
-		if (function_exists('apc_fetch') && Configure::read('debug') == 0) {
-			Cache::config('default', array(
-			'engine' => 'Apc', //[required]
-				'duration' => 3600, //[optional]
-				'probability' => 100, //[optional]
-				'prefix' => 'DEFAULT_', //[optional]  prefix every cache file with this string
-			));
-			Cache::config('_cake_core_', array(
-				'engine' => 'Apc', //[required]
-				'duration' => 3600, //[optional]
-				'probability' => 100, //[optional]
-				'prefix' => '_cake_core_', //[optional]  prefix every cache file with this string
-			));
-			// Override the debug_lot cache as not doing so makes some Cache::write() calls use the File cache
-			Cache::config('debug_kit', array(
-				'engine' => 'Apc', //[required]
-				'duration' => '+4 hours', //[optional]
-				'probability' => 100, //[optional]
-				'prefix' => 'DEBUG_KIT_', //[optional]  prefix every cache file with this string
-			));
-			Cache::config('QUERYCACHE', array(
-				'engine' => 'Apc', //[required]
-				'duration' => 100, //[optional]
-				'probability' => 100, //[optional]
-				'prefix' => 'QUERYCACHE_', //[optional]  prefix every cache file with this string
-			));
-		}
+        // Securty
+        'Security.level' => 'medium',
+        'Security.salt' => 'SALT',
+        'Security.cipherSeed' => 'CIPHERSEED',
+    ],
+    function () {
+        error_reporting(0);
 
-		if (!defined('FULL_BASE_URL')) {
-			define('FULL_BASE_URL', Configure::read('Settings.FULL_BASE_URL'));
-		}
-	}
+        if (function_exists('apc_fetch') && Configure::read('debug') == 0) {
+            Cache::config('default', [
+            'engine' => 'Apc', //[required]
+                'duration' => 3600, //[optional]
+                'probability' => 100, //[optional]
+                'prefix' => 'DEFAULT_', //[optional]  prefix every cache file with this string
+            ]);
+            Cache::config('_cake_core_', [
+                'engine' => 'Apc', //[required]
+                'duration' => 3600, //[optional]
+                'probability' => 100, //[optional]
+                'prefix' => '_cake_core_', //[optional]  prefix every cache file with this string
+            ]);
+            // Override the debug_lot cache as not doing so makes some Cache::write() calls use the File cache
+            Cache::config('debug_kit', [
+                'engine' => 'Apc', //[required]
+                'duration' => '+4 hours', //[optional]
+                'probability' => 100, //[optional]
+                'prefix' => 'DEBUG_KIT_', //[optional]  prefix every cache file with this string
+            ]);
+            Cache::config('QUERYCACHE', [
+                'engine' => 'Apc', //[required]
+                'duration' => 100, //[optional]
+                'probability' => 100, //[optional]
+                'prefix' => 'QUERYCACHE_', //[optional]  prefix every cache file with this string
+            ]);
+        }
+
+        if (!defined('FULL_BASE_URL')) {
+            define('FULL_BASE_URL', Configure::read('Settings.FULL_BASE_URL'));
+        }
+    }
 );

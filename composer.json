@@ -1,42 +1,51 @@
-
 {
-  "name": "josegonzalez/cakephp-environments",
-  "description": "CakePHP plugin to handle environments-level configuration",
-  "type": "cakephp-plugin",
-  "keywords": [
-    "cakephp",
-    "environments",
-    "configuration"
-  ],
-  "homepage": "http://github.com/josegonzalez/cakephp-environments",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Jose Diaz-Gonzalez",
-      "email": "email@josediazgonzalez.com",
-      "homepage": "http://josediazgonzalez.com",
-      "role": "Maintainer"
+    "name": "josegonzalez/cakephp-environments",
+    "description": "CakePHP plugin to handle environments-level configuration",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp", "environments", "configuration"],
+    "homepage": "https://github.com/josegonzalez/cakephp-environments",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jose Diaz-Gonzalez",
+            "email": "cakephp+environments@josediazgonzalez.com",
+            "homepage": "http://josediazgonzalez.com",
+            "role": "Maintainer"
+        },
+        {
+            "name": "David Kullmann",
+            "role": "Contributor",
+            "homepage": "https://github.com/dkullmann"
+        },
+        {
+            "name": "David Steinsland",
+            "role": "Contributor",
+            "homepage": "https://github.com/davidsteinsland"
+        }
+    ],
+    "require": {
+        "cakephp/cakephp": "~3.0",
+        "php": ">=5.4"
     },
-    {
-      "name": "David Kullmann",
-      "role": "Contributor",
-      "homepage": "https://github.com/dkullmann"
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*",
+        "cakephp/cakephp-codesniffer": "dev-master",
+        "satooshi/php-coveralls": "dev-master"
     },
-    {
-      "name": "David Steinsland",
-      "role": "Contributor",
-      "homepage": "https://github.com/davidsteinsland"
+    "support": {
+        "email": "cakephp+environments@josediazgonzalez.com",
+        "issues": "https://github.com/josegonzalez/cakephp-environments/issues",
+        "source": "https://github.com/josegonzalez/cakephp-environments"
+    },
+    "autoload": {
+        "psr-4": {
+            "Josegonzalez\\Environments\\": "src",
+            "Josegonzalez\\Environments\\Test\\Fixture\\": "tests\\Fixture"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Josegonzalez\\Environments\\Test\\": "tests"
+        }
     }
-  ],
-  "require": {
-    "composer/installers": "*"
-  },
-  "support": {
-    "email": "cakephp+environments@josediazgonzalez.com",
-    "issues": "https://github.com/josegonzalez/cakephp-environments/issues",
-    "source": "https://github.com/josegonzalez/cakephp-environments"
-  },
-  "extra": {
-    "installer-name": "Environments"
-  }
 }

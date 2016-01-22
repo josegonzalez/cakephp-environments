@@ -31,7 +31,9 @@ _[Using [Composer](http://getcomposer.org/)]_
 
 You need to enable the plugin your `config/bootstrap.php` file:
 
-	Plugin::load('Josegonzalez/Environments');
+```php
+Plugin::load('Josegonzalez/Environments');
+```
 
 If you are already using `Plugin::loadAll();` before usage, then this is not necessary.
 
@@ -48,18 +50,23 @@ We specify multiple **environment** files to separate the various configurations
 
 Your `environments.php` should contain the following:
 
-	<?php
-	use Josegonzalez\Environments\Environment;
+```php
+<?php
+use Josegonzalez\Environments\Environment;
 
-	include dirname(__FILE__) . DS . 'environments' . DS . 'production.php';
-	include dirname(__FILE__) . DS . 'environments' . DS . 'staging.php';
-	include dirname(__FILE__) . DS . 'environments' . DS . 'development.php';
+include dirname(__FILE__) . DS . 'environments' . DS . 'production.php';
+include dirname(__FILE__) . DS . 'environments' . DS . 'staging.php';
+include dirname(__FILE__) . DS . 'environments' . DS . 'development.php';
 
-	Environment::start();
+Environment::start();
+?>
+```
 
 Then, you need to include the `environments.php` file you created in your application, for example in `bootstrap.php`:
 
-	include dirname(__FILE__) . DS . 'environments.php';
+```php
+include dirname(__FILE__) . DS . 'environments.php';
+```
 
 This will:
 
@@ -71,7 +78,9 @@ This will:
 
 Each environment may be configured as follows:
 
-	Josegonzalez\Environments\Environment::configure($name, $params, $config = null, $callable = null);
+```php
+Josegonzalez\Environments\Environment::configure($name, $params, $config = null, $callable = null);
+```
 
 Example usage of the `\Josegonzalez\Environments\Environment::configure()` call is available in the `config/environments` folder of this plugin.
 
@@ -80,48 +89,56 @@ Example usage of the `\Josegonzalez\Environments\Environment::configure()` call 
 
 	If a previous environment is not enabled, this one will be set
 
-    	\Josegonzalez\Environments\Environment::configure(
-            'development',
-            true,
-            ['debug' => true]
-        );
+    ```php
+    \Josegonzalez\Environments\Environment::configure(
+        'development',
+        true,
+        ['debug' => true]
+    );
+    ```
 
 	If an array, the **keys** may be function names that are called, with the **values** being passed to it:
 
-    	\Josegonzalez\Environments\Environment::configure(
-            'development',
-            [
-        		'some_function' => 'aValueForThisCheck',
-        		'another_function' => 'aDifferentValueForThisCheck',
-    	   ]
-        );
+    ```php
+    \Josegonzalez\Environments\Environment::configure(
+        'development',
+        [
+        	'some_function' => 'aValueForThisCheck',
+        	'another_function' => 'aDifferentValueForThisCheck',
+    	]
+    );
+    ```
 
 	In all other cases, we simply check the environment:
 
-    	\Josegonzalez\Environments\Environment::configure(
-            'octo_development',
-            [
-        		'SERVER_NAME' => 'octo-example.dev',
-        	]
-        );
+    ```php
+    \Josegonzalez\Environments\Environment::configure(
+        'octo_development',
+        [
+        	'SERVER_NAME' => 'octo-example.dev',
+        ]
+    );
 
-    	\Josegonzalez\Environments\Environment::configure(
-            'bear_development',
-            [
-        		'SERVER_NAME' => 'bear-example.dev',
-        	]
-        );
+    \Josegonzalez\Environments\Environment::configure(
+        'bear_development',
+        [
+        	'SERVER_NAME' => 'bear-example.dev',
+        ]
+    );
 
-    	\Josegonzalez\Environments\Environment::configure(
-            'development',
-            [
-    		  'CAKE_ENV' => 'development',
-    	    ]
-        );
+    \Josegonzalez\Environments\Environment::configure(
+        'development',
+        [
+    		'CAKE_ENV' => 'development',
+    	]
+    );
+    ```
 
 	If we are running in CLI, the only check enforced is `CAKE_ENV`, and the value MUST be the name of the environment:
 
-		CAKE_ENV=production Console/cake bake all
+    ```shell
+	CAKE_ENV=production Console/cake bake all
+	```
 
 	If the `CAKE_ENV` environment variable is set at all, it takes precedence over everything, including a boolean value for `$params`.
 - `$config`: If set, an array of `keys` => `values` that are set via `Configure::write()`. Useful for batch-setting api keys, database connection information, etc.
